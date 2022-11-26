@@ -6,7 +6,9 @@ import About from "./components/About";
 import Navbar from "./components/Navbar";
 import OrderSummary from "./components/OrderSummary";
 import NoMatchFound from "./components/NoMatchFound";
-
+import Product from "./components/Product";
+import FeaturedProduct from "./components/FeaturedProduct";
+import NewProduct from "./components/NewProduct";
 function App() {
   return (
     <div className="App">
@@ -16,6 +18,11 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/order-summary" element={<OrderSummary />}></Route>
         <Route path="*" element={<NoMatchFound />}></Route>
+        <Route path="/product" element={<Product/>}>
+          <Route index element={< FeaturedProduct />}></Route>
+          <Route path="featured-product" element={<FeaturedProduct />}></Route>
+          <Route path="new-product" element={<NewProduct />}></Route>
+        </Route>
       </Routes>
     </div>
   );
