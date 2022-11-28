@@ -1,8 +1,9 @@
 import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import About from "./components/About";
+// import About from "./components/About";
 import Navbar from "./components/Navbar";
 import OrderSummary from "./components/OrderSummary";
 import NoMatchFound from "./components/NoMatchFound";
@@ -11,13 +12,16 @@ import FeaturedProduct from "./components/FeaturedProduct";
 import NewProduct from "./components/NewProduct";
 import Users from "./components/Users";
 import UserDetails from "./components/UserDetails";
+import Profile from "./components/Profile";
+const LazyAbout = React.lazy(() => import("./components/About"));
+
 function App() {
   return (
     <div className="App">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
+        <Route path="/about" element={<React.Suspense fallback="...loading"><LazyAbout /></React.Suspense>}></Route>
         <Route path="/order-summary" element={<OrderSummary />}></Route>
         <Route path="*" element={<NoMatchFound />}></Route>
         <Route path="/product" element={<Product/>}>
@@ -27,6 +31,7 @@ function App() {
         </Route>
         <Route path="/users" element={<Users />}></Route>
         <Route path="/users/:userId" element={<UserDetails />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
     </div>
   );
