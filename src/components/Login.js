@@ -1,15 +1,20 @@
 
 import { useState } from 'react'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation } from "react-router-dom";
 import {useAuth} from "./auth";
+
 const Login = () => {
     const [user, setUser] = useState("");
+    const location = useLocation();
     const auth=useAuth();
     const navigate =useNavigate();
+    const redirectPath = location.state?.path || "/";
     const handleLogin = () => {
         auth.login(user);
-        navigate("/")
+        navigate(redirectPath, {replace: true});
     }
+
+
   return (
     <div>
         <label>
